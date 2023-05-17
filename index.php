@@ -4,6 +4,7 @@ require_once 'vendor/autoload.php';
 include 'componentes/calcular_total.php';
 
 
+
 $produtoDao = new \App\Model\ProdutoDao();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -16,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $produtos = $produtoDao->read();
 
+$error = false;
+$erro = isset($_GET['error']) && $_GET['error'] == 1;
+
 ?>
 
 <!doctype html>
@@ -27,7 +31,7 @@ $produtos = $produtoDao->read();
     <title>Estoque</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="style1.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet"
@@ -44,7 +48,7 @@ $produtos = $produtoDao->read();
         <div>
             <h1>DASHBOARD ESTOQUE</h1>
         </div>
-        
+
         <section>
             <div class="menu">
                 <h2>Controll</h2>
@@ -59,10 +63,10 @@ $produtos = $produtoDao->read();
                     <span class="material-symbols-outlined sair">
                         login
                     </span>
-                    <li><a>Home</a></li>
+                    <li><a href="#">Home</a></li>
                     <li><a href="pag/conta.php">Conta</a></li>
 
-                    <li><a>Sair</a></li>
+                    <li><a href="#">Sair</a></li>
                 </ul>
             </div>
         </section>
@@ -83,12 +87,12 @@ $produtos = $produtoDao->read();
                     </div>
                     <div class="col-2 controle-visual shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                         <h2>Devoluções</h2>
-                        <p></p>
+                        <p class="producao">Em Breve</p>
 
                     </div>
                     <div class="col-2 controle-visual shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                         <h2>vendas</h2>
-                        
+
 
                     </div>
 
@@ -100,7 +104,7 @@ $produtos = $produtoDao->read();
                             <label class="form-label">Nome</label>
                             <input type="text" name="nome" class="form-control" required>
                             <label>Preço</label>
-                            <input type="number" name="preco" class="form-control" required>
+                            <input type="text" name="preco" class="form-control" required>
                             <label>Quantidade</label>
                             <input type="number" name="quantidade" class="form-control" required>
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -120,7 +124,7 @@ $produtos = $produtoDao->read();
                 <div class="row align-items-start ">
                     <div class="col estoque shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                         <table class="table">
-                            
+
                             <thead>
                                 <tr>
                                     <th scope="col">id</th>
@@ -129,6 +133,7 @@ $produtos = $produtoDao->read();
                                     <th scope="col">Quantidade</th>
                                     <th scope="col">Total R$</th>
                                     <th scope="col">Baixar</th>
+                                    <th scope="col">Devolução</th>
                                     <th scope="col">Excluir</th>
                                 </tr>
                             </thead>
@@ -136,7 +141,7 @@ $produtos = $produtoDao->read();
                             <tbody>
                                 <?php $quantidade_total_baixa = 0; ?>
                                 <?php foreach ($produtos as $produto): ?>
-                                    <input type="hidden" name="quantidade_atual" value="<?php $produto['quantidade'] ?>";>
+                                    <input type="hidden" name="quantidade_atual" value="<?php $produto['quantidade'] ?>" ;>
                                     <tr>
                                         <td>
                                             <?php echo $produto['id'] ?>
@@ -156,18 +161,31 @@ $produtos = $produtoDao->read();
                                         <td>
                                             <form method="post" action="componentes/baixa_produto.php">
                                                 <input type="hidden" name="id_produto" value="<?php echo $produto['id'] ?>">
-                                                <input type="number" name="quantidade_baixa" value="0" id="baixar">
-                                                <button type="submit" class="btn btn-primary">Baixar</button>
+                                                <input type="number" name="quantidade_baixa" value="0">
+                                                <button type="submit" class="btn btn-primary"
+                                                    class="button-estoque">Baixar</button>
                                             </form>
                                         </td>
+                                        <td>
+                                            <form method="post" action="componentes/devolucoes.php">
+                                                <input type="hidden" name="id_produto" value="<?php echo $produto['id'] ?>">
+                                                <input type="number" name="quantidade_devolucao" value="0">
+                                                <button type="submit" class="btn btn-info"
+                                                    class="button-estoque">Devolução</button>
+                                        </td>
                                         <td><a href="componentes/excluir_produto.php?id=<?php echo $produto['id'] ?>"
-                                                class="btn btn-danger">Excluir</a></td>
+                                                class="btn btn-danger" class="button-estoque">Excluir</a></td>
 
                                     </tr>
-                                    <?php $quantidade_total_baixa += $_POST['quantidade_baixa']?>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <div id="popup" class="popup">
+                            <div class="popup-content">
+                                <span class="close" onclick="closePopup()">&times;</span>
+                                <p id="popup-message">Quantidade superior a quantidade em estoque</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -175,6 +193,19 @@ $produtos = $produtoDao->read();
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
             crossorigin="anonymous"></script>
+        <script>
+            
+            function closePopup() {
+                document.getElementById("popup").style.display = "none";
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+            <?php if($erro) : ?>
+                
+                document.getElementById("popup-message").textContent = "Não há produtos suficientes em estoque";
+                document.getElementById("popup").style.display = "block";
+            <?php endif; ?>
+            });
+        </script>
 </body>
 
 </html>

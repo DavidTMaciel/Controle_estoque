@@ -30,7 +30,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $baixas= $stmt->fetch();
 
     echo "<div>Quantidade de produtos baixados: " . $baixas['quantidade_baixada'] . "</div>";
-
+    echo'codigo com erro';
     exit;
 
 }

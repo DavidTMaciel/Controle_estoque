@@ -2,7 +2,7 @@
  namespace App\Model;
 
 class Produto{
-    private $id,$nome, $preco, $quantidade;
+    private $id,$nome, $preco, $quantidade, $devolucao;
 
     public function getId(){
         return $this->id;
@@ -31,5 +31,6 @@ class Produto{
     public function setQuantidade($quantidade){
         $this->quantidade = $quantidade;
     }
+
 }
 
