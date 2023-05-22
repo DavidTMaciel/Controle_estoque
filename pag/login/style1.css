@@ -30,7 +30,7 @@ h2 {
 }
 
 input {
-    border: solid 1px rgba(48, 48, 48, 0.8);
+    border: solid 1px #8a2be2;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     width: 380px;
@@ -45,7 +45,7 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background-image: url('../assets/fundo2.jpg');
+    background-image: url('../../assets/fundo2.jpg');
     background-position: center center;
     background-size: cover;
 }
@@ -53,12 +53,13 @@ body {
 button.btn {
     margin: 10px 0;
     width: 380px;
-    font-size: 24px;
+    font-size: 20px;
     color: white;
+    
 }
 
 label,
-button,
+button.btn,
 p,h2 {
     font-family: 'Orbitron', sans-serif;
 }
@@ -78,18 +79,26 @@ p,h2 {
     height: 50%;
     margin: 2px;
     text-decoration: none;
-    border-radius: 5px;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    
+    
 }
 
-button a {
+button{
     text-decoration: none;
     color: inherit;
     color: #4040ff;
+    border-radius: 5px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
 
 }
+#btn-fechar{
+    width: 30%;
+    background-color: #ff0000;
+    color: #fff;
 
-.container-cadastro p {
-    margin-top: 5px;
-    color: #ffffff;
 }
+.envio{
+    background-color: #00ced1;
+}
+
+
