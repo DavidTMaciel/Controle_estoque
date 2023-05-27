@@ -17,7 +17,17 @@
 
 ![dashboard](https://github.com/DavidTMaciel/Controle_estoque/assets/107083288/5ebd8612-3ee6-458a-b303-d1864ec40bb7)
 
-
+<h3>Tecnologias Utilizadas</h3>
+ <ul>
+    <li>PHP</li>
+    <li>JavaScript</li>    
+    <li>Bootstrap</li>
+    <li>CSS</li>
+    <li>MySQL</li>
+    <li>SQL</li> 
+ </ul>
+<p>Foi utilizado juntamente o composer como gerenciador de dependencias.</p>
+<p>A versão atual do projeto não é final, projeto ainda está sendo desenvolvido, codigo está em refatoramento e correção de bugs.</p>
 
 
 
