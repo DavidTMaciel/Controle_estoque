@@ -31,7 +31,7 @@ $erro = isset($_GET['error']) && $_GET['error'] == 1;
     <title>Estoque</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style1.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet"
@@ -64,7 +64,7 @@ $erro = isset($_GET['error']) && $_GET['error'] == 1;
                         login
                     </span>
                     <li><a href="#">Home</a></li>
-                    <li><a href="pag/conta.php">Conta</a></li>
+                    <li><a href="pag/conta/conta.php">Conta</a></li>
 
                     <li><a href="#">Sair</a></li>
                 </ul>
