@@ -2,6 +2,7 @@
 
 require_once 'vendor/autoload.php';
 include 'componentes/calcular_total.php';
+require_once 'componentes/formatarMoeda.php';
 
 
 
@@ -120,7 +121,7 @@ $erro = isset($_GET['error']) && $_GET['error'] == 1;
                 </div>
             </div>
 
-            <div class="container text-center limitador container-estoque">
+            <div class="container text-center  container-estoque">
                 <div class="row align-items-start ">
                     <div class="col estoque shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                         <table class="table">
@@ -147,10 +148,10 @@ $erro = isset($_GET['error']) && $_GET['error'] == 1;
                                             <?php echo $produto['id'] ?>
                                         </td>
                                         <td>
-                                            <?php echo $produto['nome'] ?>
+                                            <?php echo strtoupper($produto['nome']) ?>
                                         </td>
                                         <td>
-                                            <?php echo "R$" . $produto['preco'] ?>
+                                            <?php echo formartarMoeda($produto['preco']) ?>
                                         </td>
                                         <td>
                                             <?php echo $produto['quantidade'] ?>
@@ -161,7 +162,7 @@ $erro = isset($_GET['error']) && $_GET['error'] == 1;
                                         <td>
                                             <form method="post" action="componentes/baixa_produto.php">
                                                 <input type="hidden" name="id_produto" value="<?php echo $produto['id'] ?>">
-                                                <input type="number" name="quantidade_baixa" value="0">
+                                                <input type="number" name="quantidade_baixa" value="0" class="estilo-input">
                                                 <button type="submit" class="btn btn-primary"
                                                     class="button-estoque">Baixar</button>
                                             </form>
@@ -169,7 +170,7 @@ $erro = isset($_GET['error']) && $_GET['error'] == 1;
                                         <td>
                                             <form method="post" action="componentes/devolucoes.php">
                                                 <input type="hidden" name="id_produto" value="<?php echo $produto['id'] ?>">
-                                                <input type="number" name="quantidade_devolucao" value="0">
+                                                <input type="number" name="quantidade_devolucao" value="0" class="estilo-input">
                                                 <button type="submit" class="btn btn-info"
                                                     class="button-estoque">Devolução</button>
                                         </td>

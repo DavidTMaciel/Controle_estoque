@@ -334,7 +334,7 @@ th {
 }
 
 tbody tr {
-    background: linear-gradient(to bottom, #ffffff, #cccccc);
+    
 }
 
 tr button {
@@ -350,9 +350,9 @@ table {
     width: 100%;
     border-collapse: collapse;
 }
-form input {
+.estilo-input{
     border-radius: 10%;
-    width: 50px;
+    width: 40px;
 }
 
 .button-estoque {
