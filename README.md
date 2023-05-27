@@ -9,6 +9,14 @@
     <li>Visual do estoque</li>
 </ul>
 
+<h2>Login</h2>
+
+![login](https://github.com/DavidTMaciel/Controle_estoque/assets/107083288/bcc41e1f-7cb8-4eaf-a8cd-772a1814edb9)
+
+<h2>Dashboard</h2>
+
+![dashboard](https://github.com/DavidTMaciel/Controle_estoque/assets/107083288/5ebd8612-3ee6-458a-b303-d1864ec40bb7)
+
 
 
 
